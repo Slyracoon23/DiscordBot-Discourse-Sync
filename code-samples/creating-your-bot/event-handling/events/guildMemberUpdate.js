@@ -1,3 +1,5 @@
+const { Api_Key, Api_Username } = require("../config.json");
+
 module.exports = {
 	name: "guildMemberUpdate",
 	async execute(oldMember, newMember) {
@@ -33,7 +35,17 @@ module.exports = {
 
     // Check whether discord user name exist on discourse/forum
     // API endpoint "Get a single user by username"
-    // https://{defaultHost}/u/{username.json} 
+    // METHOD: GET
+    // https://{defaultHost}/u/{username.json}
+    //
+    //
+
+    // Add user to a group
+    // API endpoint "Add group members"
+    // METHOD: PUT
+    // https://{defaultHost}/groups/{id}/members.json
+    //
+    //
 
     // Check whether we added or removed roles
     newMemberSize = newMember.roles.cache.size;
