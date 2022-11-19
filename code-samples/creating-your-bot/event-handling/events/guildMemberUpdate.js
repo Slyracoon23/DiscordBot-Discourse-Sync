@@ -31,13 +31,17 @@ module.exports = {
     console.log(`ID: ${MemberId}`);
     console.log(`Name: ${MemberName}`);
 
-    // check whether we added or removed roles
+    // Check whether discord user name exist on discourse/forum
+    // API endpoint "Get a single user by username"
+    // https://{defaultHost}/u/{username.json} 
+
+    // Check whether we added or removed roles
     newMemberSize = newMember.roles.cache.size;
     oldMemberSize = oldMember.roles.cache.size;
 		console.log(`new size: ${newMemberSize}`);
 		console.log(`old size: ${oldMemberSize}`);
 		// needed to +1 for oldMemberSize due to @everyone role in discord
-    if(newMemberSize > oldMemberSize+1) {
+    if(newMemberSize > oldMemberSize-1) {
       // add logic for added role
       console.log("role added");
     } else {
