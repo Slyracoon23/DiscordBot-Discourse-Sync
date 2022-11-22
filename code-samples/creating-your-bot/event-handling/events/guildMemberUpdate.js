@@ -26,9 +26,9 @@ module.exports = {
     / MemberId = Discord ID of the current user (snowflake)
     / MemberName = Discord username (if no username then nickname) of the current user (string)
     */ 
-    var MemberNickName = newMember.nickname;
-    var MemberId = newMember.id;
-    var MemberName = newMember.displayName;
+    let MemberNickName = newMember.nickname;
+    let MemberId = newMember.id;
+    let MemberName = newMember.displayName;
     console.log(`Nickname: ${MemberNickName}`);
     console.log(`ID: ${MemberId}`);
     console.log(`Name: ${MemberName}`);
