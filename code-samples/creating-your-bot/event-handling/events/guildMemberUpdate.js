@@ -10,9 +10,9 @@ module.exports = {
     / newRoleId = ID of the changed Role
     / newRoleName = Name of the changed Role
     */
-    var newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
-    var newRoleId = newRole.id;
-    var newRoleName = newRole.name; 
+    let newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
+    let newRoleId = newRole.id;
+    let newRoleName = newRole.name; 
 		//console.log(newRole);
 		console.log(`Role ID: ${newRoleId}`);
 		console.log(`Role Name: ${newRoleName}`);
