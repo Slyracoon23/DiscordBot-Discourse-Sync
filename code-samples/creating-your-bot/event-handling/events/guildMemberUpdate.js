@@ -8,6 +8,21 @@ module.exports = {
 		//console.log(oldMember, newMember);
     
     let defaultHost = "forum.citydao.io";
+
+    // Check to see if the structure we called on is partial or not
+    if (oldMember.partial) {
+      // If it's partial we will retrieve the missing data from the API
+      // note: this will prevent empty roles on oldMember after bot restart
+      oldMember.fetch()
+        .then(fullMember => {
+          checker(fullMember, newMember);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      checker(oldMember, newMember);
+    }
     
     /* 
     / Grab object for the new role
@@ -34,7 +49,21 @@ module.exports = {
     }
     */
 
-
+    function checker(a, b) {
+      let oldMemberSize = a.roles.cache.size;
+      let newMemberSize = b.roles.cache.size;
+      console.log(`old size: ${oldMemberSize}`);
+      console.log(`new size: ${newMemberSize}`);
+        if(newMemberSize > oldMemberSize) {
+          // add logic for added role
+          console.log("role added");
+        } else {
+          // add logic for removed role
+          console.log("role removed");
+        };
+    }
+    checker(oldMember, newMember);
+    /*
 		//console.log(newMember.roles.cache);
     // Check whether we added or removed roles
     newMemberSize = newMember.roles.cache.size;
@@ -49,7 +78,7 @@ module.exports = {
       // add logic for removed role
       console.log("role removed");
     };
-    
+    */    
 
 
     /* 
