@@ -37,7 +37,7 @@ module.exports = {
 		console.log(`new size: ${newMemberSize}`);
 		console.log(`old size: ${oldMemberSize}`);
 		// needed to +1 for oldMemberSize due to @everyone role in discord
-    if(newMemberSize > oldMemberSize+1) {
+    if(newMemberSize > oldMemberSize) {
       // add logic for added role
       console.log("role added");
     } else {
