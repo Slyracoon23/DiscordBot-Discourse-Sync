@@ -70,7 +70,7 @@ module.exports = {
     };
 
     // If the username exist it will be added to the group
-    /*axios
+    axios
       .get(url)
       // Check username exist on discourse
       .then(( res ) => {
@@ -105,7 +105,7 @@ module.exports = {
       .catch((error) => {
         console.error("Username does not exist on Discourse");
       });
-      */
+      
     console.log(postUrl);
     // Add user to a group
     // API endpoint "Add group members"
