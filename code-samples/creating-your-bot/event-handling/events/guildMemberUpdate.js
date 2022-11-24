@@ -132,8 +132,7 @@ module.exports = {
         } else {
         // Remove user from the group if they were removed from the role
           axios.delete(postUrl, {
-            params: data
-          }, {
+            params: data,
             headers: headers
           })
           .then(( res ) => {
