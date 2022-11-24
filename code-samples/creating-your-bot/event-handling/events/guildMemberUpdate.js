@@ -32,12 +32,12 @@ module.exports = {
     / MemberId = Discord ID of the current user (snowflake)
     / MemberName = Discord username (if no username then nickname) of the current user (string)
     */ 
-    let MemberNickName = newMember.nickname;
-    let MemberId = newMember.id;
-    let MemberName = newMember.displayName;
-    console.log(`Nickname: ${MemberNickName}`);
-    console.log(`ID: ${MemberId}`);
-    console.log(`Name: ${MemberName}`);
+    const MemberNickName = newMember.nickname;
+    const MemberId = newMember.id;
+    const MemberName = newMember.displayName;
+    //console.log(`Nickname: ${MemberNickName}`);
+    //console.log(`ID: ${MemberId}`);
+    //console.log(`Name: ${MemberName}`);
 
     // Check whether discord user name exist on discourse/forum
     // API endpoint "Get a single user by username"
@@ -66,8 +66,9 @@ module.exports = {
     / newRoleName = Name of the changed Role
     */
     let newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
-    let newRoleId = newRole.id;
-    let newRoleName = newRole.name; 
+    const {id:newRoleId, name:newRoleName} = newRole;
+    //let newRoleId = newRole.id;
+    //let newRoleName = newRole.name; 
 		console.log(`Role ID: ${newRoleId}`);
 		console.log(`Role Name: ${newRoleName}`);
 
@@ -80,8 +81,8 @@ module.exports = {
     };
 
     function checker(a, b) {
-      let oldMemberSize = a.roles.cache.size;
-      let newMemberSize = b.roles.cache.size;
+      const oldMemberSize = a.roles.cache.size;
+      const newMemberSize = b.roles.cache.size;
       console.log(`old size: ${oldMemberSize}`);
       console.log(`new size: ${newMemberSize}`);
 
