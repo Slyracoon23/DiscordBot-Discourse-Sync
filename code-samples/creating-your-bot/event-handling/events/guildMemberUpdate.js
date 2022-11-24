@@ -10,9 +10,9 @@ module.exports = {
     / newRoleId = ID of the changed Role
     / newRoleName = Name of the changed Role
     */
-    let newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
-    let newRoleId = newRole.id;
-    let newRoleName = newRole.name; 
+    const newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
+    const {id:newRoleId, name:newRoleName} = newRole;
+
 		//console.log(newRole);
 		console.log(`Role ID: ${newRoleId}`);
 		console.log(`Role Name: ${newRoleName}`);
@@ -24,16 +24,16 @@ module.exports = {
     / MemberId = Discord ID of the current user (snowflake)
     / MemberName = Discord username (if no username then nickname) of the current user (string)
     */ 
-    let MemberNickName = newMember.nickname;
-    let MemberId = newMember.id;
-    let MemberName = newMember.displayName;
+    const MemberNickName = newMember.nickname;
+    const MemberId = newMember.id;
+    const MemberName = newMember.displayName;
     console.log(`Nickname: ${MemberNickName}`);
     console.log(`ID: ${MemberId}`);
     console.log(`Name: ${MemberName}`);
 
     // check whether we added or removed roles
-    newMemberSize = newMember.roles.cache.size;
-    oldMemberSize = oldMember.roles.cache.size;
+    const newMemberSize = newMember.roles.cache.size;
+    const oldMemberSize = oldMember.roles.cache.size;
 		console.log(`new size: ${newMemberSize}`);
 		console.log(`old size: ${oldMemberSize}`);
 		// needed to +1 for oldMemberSize due to @everyone role in discord
