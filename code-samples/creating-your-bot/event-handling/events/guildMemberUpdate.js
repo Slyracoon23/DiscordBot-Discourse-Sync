@@ -8,7 +8,7 @@ module.exports = {
 		//console.log(oldMember, newMember);
     
     let defaultHost = "forum.citydao.io";
-    let counter = 0;
+    let counter = 1;
 
     // Check to see if the structure we called on is partial or not
     if (oldMember.partial) {
@@ -73,10 +73,10 @@ module.exports = {
 
     if (newRoleName == "test-role-1") {
       let postUrl = `https://${defaultHost}/groups/${discord_founding}/members.json`;
-      //addRemoveRole(postUrl, newRoleName);
+      addRemoveRole(postUrl, newRoleName);
     } else if (newRoleName == "test-role-2") {
       let postUrl = `https://${defaultHost}/groups/${discord_citizen}/members.json`;
-      //addRemoveRole(postUrl, newRoleName);
+      addRemoveRole(postUrl, newRoleName);
     };
 
     function checker(a, b) {
