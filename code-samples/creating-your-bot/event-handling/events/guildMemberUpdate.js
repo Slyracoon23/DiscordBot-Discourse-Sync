@@ -21,6 +21,20 @@ module.exports = {
 		console.log(`Role ID: ${newRoleId}`);
 		console.log(`Role Name: ${newRoleName}`);
 
+    /*
+    const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+    if (removedRoles.size > 0) {
+      console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+    }
+
+    // If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
+    const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+    if (addedRoles.size > 0) {
+      console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+    }
+    */
+
+
 		//console.log(newMember.roles.cache);
     // Check whether we added or removed roles
     newMemberSize = newMember.roles.cache.size;
@@ -35,6 +49,8 @@ module.exports = {
       // add logic for removed role
       console.log("role removed");
     };
+    
+
 
     /* 
     / MemberNickName = Discord nickname of the current user (string)
@@ -70,14 +86,14 @@ module.exports = {
     };
 
     // If the username exist it will be added to the group
-    axios
+    /*axios
       .get(url)
       // Check username exist on discourse
       .then(( res ) => {
         console.log(res.status);
         // User found
         // Add user to the group if they were added to the role
-        if (newMemberSize >= oldMemberSize+1) { 
+        if (newMemberSize > oldMemberSize+1) { 
           axios.put(postUrl, putData, {
             headers: headers
           })
@@ -105,7 +121,7 @@ module.exports = {
       .catch((error) => {
         console.error("Username does not exist on Discourse");
       });
-      
+      */
     console.log(postUrl);
     // Add user to a group
     // API endpoint "Add group members"
