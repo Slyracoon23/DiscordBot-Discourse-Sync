@@ -8,6 +8,7 @@ module.exports = {
 		//console.log(oldMember, newMember);
     
     let defaultHost = "forum.citydao.io";
+    let counter = 0;
 
     // Check to see if the structure we called on is partial or not
     if (oldMember.partial) {
@@ -15,15 +16,15 @@ module.exports = {
       // note: this will prevent empty roles on oldMember after bot restart
       oldMember.fetch()
         .then(fullMember => {
-          checker(fullMember, newMember);
+          counter = checker(fullMember, newMember);
         })
         .catch(error => {
           console.log(error);
         });
     } else {
-      checker(oldMember, newMember);
+      counter = checker(oldMember, newMember);
     }
-    
+    console.log(`counter: ${counter}`);
     /* 
     / Grab object for the new role
     / newRoleId = ID of the changed Role
@@ -54,33 +55,33 @@ module.exports = {
       let newMemberSize = b.roles.cache.size;
       console.log(`old size: ${oldMemberSize}`);
       console.log(`new size: ${newMemberSize}`);
-        if(newMemberSize > oldMemberSize) {
+        /* 
+        / Note: 
+        / At BOT restart OldMember will only come with the @everyone role.
+        / calling fetch() on partial completes the structure... which is NewMember
+        / This means oldMemberSize and newMemberSize will be the same on BOT start.
+        / Quick fix:
+        / 1. if(newMemberSize >= oldMemberSize)
+        /   - first bot event will always be "role added" action.
+        /   - subsequent events will behave normally.
+        / 
+        / 2. if(newMemberSize > oldMemberSize)
+        /   - first bot event will always be a "role removed" action.
+        /   - subsequent events will be have normally.
+        */
+
+        if(newMemberSize >= oldMemberSize) {
           // add logic for added role
           console.log("role added");
+          return 1;
         } else {
           // add logic for removed role
           console.log("role removed");
+          return 0;
         };
     }
-    checker(oldMember, newMember);
     /*
 		//console.log(newMember.roles.cache);
-    // Check whether we added or removed roles
-    newMemberSize = newMember.roles.cache.size;
-    oldMemberSize = oldMember.roles.cache.size;
-		console.log(`new size: ${newMemberSize}`);
-		console.log(`old size: ${oldMemberSize}`);
-		// needed to +1 for oldMemberSize due to @everyone role in discord
-    if(newMemberSize > oldMemberSize) {
-      // add logic for added role
-      console.log("role added");
-    } else {
-      // add logic for removed role
-      console.log("role removed");
-    };
-    */    
-
-
     /* 
     / MemberNickName = Discord nickname of the current user (string)
     / MemberId = Discord ID of the current user (snowflake)
@@ -115,14 +116,15 @@ module.exports = {
     };
 
     // If the username exist it will be added to the group
-    /*axios
+    /*
+    axios
       .get(url)
       // Check username exist on discourse
       .then(( res ) => {
         console.log(res.status);
         // User found
         // Add user to the group if they were added to the role
-        if (newMemberSize > oldMemberSize+1) { 
+        if (counter==1) { 
           axios.put(postUrl, putData, {
             headers: headers
           })
@@ -135,7 +137,7 @@ module.exports = {
         } else {
         // Remove user from the group if they were removed from the role
           axios.delete(postUrl, {
-            data: data
+            params: data
           }, {
             headers: headers
           })
@@ -148,7 +150,7 @@ module.exports = {
         }
       })
       .catch((error) => {
-        console.error("Username does not exist on Discourse");
+        console.error("Username does not exist on Discourse", error);
       });
       */
     console.log(postUrl);
