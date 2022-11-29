@@ -7,13 +7,19 @@ module.exports = {
 	async execute(oldMember, newMember) {
 		//console.log(oldMember, newMember);
     
-    let defaultHost = "forum.citydao.io";
+    const defaultHost = "forum.citydao.io";
+
+    // Counter to check whether role was ADDED or REMOVED.
+    // Counter = 1 (role is added)
+    // Counter = 0 (role is removed)
+    // Default behavior: bot will always consider the first event
+    // after start/restart on each user as a ROLE ADDED event.
     let counter = 1;
 
-    // Check to see if the structure we called on is partial or not
+    // Check to see if the structure we called on is partial or not.
     if (oldMember.partial) {
-      // If it's partial we will retrieve the missing data from the API
-      // note: this will prevent empty roles on oldMember after bot restart
+      // If it's partial we will retrieve the missing data from the API.
+      // Note: this will prevent empty roles on oldMember after bot restart.
       oldMember.fetch()
         .then(fullMember => {
           counter = checker(fullMember, newMember);
@@ -28,9 +34,9 @@ module.exports = {
     console.log(`counter: ${counter}`);
 
     /* 
-    / MemberNickName = Discord nickname of the current user (string)
-    / MemberId = Discord ID of the current user (snowflake)
-    / MemberName = Discord username (if no username then nickname) of the current user (string)
+    / MemberNickName = Discord nickname of the current user (string).
+    / MemberId = Discord ID of the current user (snowflake).
+    / MemberName = Discord username (if no username then nickname) of the current user (string).
     */ 
     const MemberNickName = newMember.nickname;
     const MemberId = newMember.id;
@@ -39,20 +45,20 @@ module.exports = {
     //console.log(`ID: ${MemberId}`);
     //console.log(`Name: ${MemberName}`);
 
-    // Check whether discord user name exist on discourse/forum
-    // API endpoint "Get a single user by username"
+    // Check whether discord user name exist on discourse/forum.
+    // API endpoint "Get a single user by username".
     // METHOD: GET
     //
     //
-    let url = `https://${defaultHost}/u/${MemberName}.json`;
+    const url = `https://${defaultHost}/u/${MemberName}.json`;
     console.log(url);
 
     //let postUrl = `https://${defaultHost}/groups/${discord_test}/members.json`;
 
-    let data = {
+    const data = {
       "usernames": MemberName
     }
-    let putData = JSON.stringify(data);
+    const putData = JSON.stringify(data);
     
     const headers = {
       "Content-Type": "application/json",
@@ -65,7 +71,7 @@ module.exports = {
     / newRoleId = ID of the changed Role
     / newRoleName = Name of the changed Role
     */
-    let newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
+    const newRole = newMember.roles.cache.difference(oldMember.roles.cache).last();
     const {id:newRoleId, name:newRoleName} = newRole;
     //let newRoleId = newRole.id;
     //let newRoleName = newRole.name; 
@@ -73,10 +79,10 @@ module.exports = {
 		console.log(`Role Name: ${newRoleName}`);
 
     if (newRoleName == "test-role-1") {
-      let postUrl = `https://${defaultHost}/groups/${discord_founding}/members.json`;
+      const postUrl = `https://${defaultHost}/groups/${discord_founding}/members.json`;
       addRemoveRole(postUrl, newRoleName);
     } else if (newRoleName == "test-role-2") {
-      let postUrl = `https://${defaultHost}/groups/${discord_citizen}/members.json`;
+      const postUrl = `https://${defaultHost}/groups/${discord_citizen}/members.json`;
       addRemoveRole(postUrl, newRoleName);
     };
 
@@ -148,47 +154,6 @@ module.exports = {
         console.error("Username does not exist on Discourse", error);
       });
     };
-
-
-
-    // If the username exist it will be added to the group
-    /*
-    axios
-      .get(url)
-      // Check username exist on discourse
-      .then(( res ) => {
-        console.log(res.status);
-        // User found
-        // Add user to the group if they were added to the role
-        if (counter==1) { 
-          axios.put(postUrl, putData, {
-            headers: headers
-          })
-          .then(( res ) => {
-            console.log(`User added to ${newRoleName}.`, res.status);
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-        } else {
-        // Remove user from the group if they were removed from the role
-          axios.delete(postUrl, {
-            params: data
-          }, {
-            headers: headers
-          })
-          .then(( res ) => {
-            console.log(`User removed from ${newRoleName}`, res.status);
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-        }
-      })
-      .catch((error) => {
-        console.error("Username does not exist on Discourse", error);
-      });
-      */
     //console.log(postUrl);
 	},
 };
