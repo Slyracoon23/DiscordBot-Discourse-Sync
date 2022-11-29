@@ -20,9 +20,12 @@ This discord bot task is to sync the Discord roles with the discourse form of Ci
 
 In-built useful and flexible features, such as
 
-#### • **Event based driven role changes:**
+#### • **Event based driven role changes**
 
-TODO
+#### • **Jest Discordjs Tesing framework**
+
+
+# Quickstart
 
 ## Install
 
@@ -31,8 +34,16 @@ npm install
 ```
 
 ## Configuration
-
-TODO
+Change `config.json`
+```json
+{
+  "clientId": "<Discord Client ID>",
+  "guildId": "<Discord Guild ID>",
+  "token": "<Discord Bot ID",
+  "Api_Key": "<Discourse API Key>",
+  "Api_Username": "<Discourse Name>"
+}
+```
 
 ## Run your bot
 
@@ -40,21 +51,25 @@ TODO
 npm start
 ```
 
-## Support & Documentation
+## Run test cases
 
-I'm working to make it more professional and easy to use for everyone. There will be a documentation out very soon.
-
-> WIP : TODO
+```sh
+npm test
+```
 
 ## Author
 
 👤 **Earl Potters**
 
-- Github: [@Slyracoon23](https://github.com/Slyracoon23) [follow here]
+- Github: [@Slyracoon23](https://github.com/Slyracoon23) 
+
+👤 **Will Jaw**
+
+- Github: [@jjaw](https://github.com/jjaw)
 
 ### Contributors
 
-👤 Thank you so much to **[Will](https://github.com/)** and **[Tuncay](https://github.com/)** for giving awesome contributions to the project.
+👤 Thank you so much to*[Tuncay](https://github.com/)** for giving awesome contributions to the project.
 
 ## 🤝 Contributing
 
@@ -63,7 +78,6 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 ## Show your support
 
 Give a ⭐️ if this project helped you! Star-ring the project gives me encouragement to continue it.
-You can also [sponsor](https://ko-fi.com) the project and get listed as a contributer! Thanks a lot.
 
 ## 📝 License
 
