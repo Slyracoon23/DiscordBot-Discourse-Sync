@@ -1,7 +1,6 @@
 const axios = require("axios");
 const { Api_Key, Api_Username } = require("../config.json");
 const {
-	discord_test,
 	discord_citizen,
 	discord_founding,
 } = require("../groups.json");
