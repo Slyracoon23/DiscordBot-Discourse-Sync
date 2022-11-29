@@ -1,4 +1,5 @@
 const axios = require("axios");
+let counter = 1;
 
 function checker(a, b) {
 	const oldMemberSize = a.roles.cache.size;
@@ -31,7 +32,7 @@ function checker(a, b) {
 	}
 }
 
-function addRemoveRole(url, headers, data, putData, postUrl, newRoleName) {
+function addRemoveRole(url, headers, data, putData, postUrl, newRoleName, counter) {
 	console.log(postUrl);
 	axios
 		.get(url)
